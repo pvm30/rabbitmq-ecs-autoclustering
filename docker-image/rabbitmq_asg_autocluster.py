@@ -25,8 +25,8 @@ except ImportError:
     import boto3
 
 # initialize boto client and ec2 resource
-client_asg = boto3.client('autoscaling', region_name='us-east-1')
-ec2 = boto3.resource('ec2', region_name='us-east-1')
+client_asg = boto3.client('autoscaling', region_name='eu-west-1')
+ec2 = boto3.resource('ec2', region_name='eu-west-1')
 
 def run(cmd):
     """

@@ -53,10 +53,10 @@ Make sure the IAM policy for the ECS instances include these: "autoscaling:Descr
 - Build & push the docker image to the ECR registry.
 
 ```
-    aws ecr get-login --region us-east-1
+    aws ecr get-login --region eu-west-1
     cd <path-to>/rabbitmq-ecs-autoclustering/docker-image
     docker build -t arnaud/rabbitmq-asg-autocluster .
-    docker tag arnaud/rabbitmq-asg-autocluster:latest ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/arnaud/rabbitmq-asg-autocluster:latest
+    docker tag arnaud/rabbitmq-asg-autocluster:latest ${AWS_ACCOUNT_ID}.dkr.ecr.eu-west-1.amazonaws.com/arnaud/rabbitmq-asg-autocluster:latest
 
 ```
 - Deploy the containers in ECS
@@ -77,7 +77,7 @@ Here are sample AWS ECS Task & Sevice definitions in YAML syntax for running the
       NetworkMode: 'host'
       ContainerDefinitions:
       - Name: rabbit
-        Image: ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/arnaud/rabbitmq-asg-autocluster:latest
+        Image: ${AWS_ACCOUNT_ID}.dkr.ecr.eu-west-1.amazonaws.com/arnaud/rabbitmq-asg-autocluster:latest
         MountPoints:
         - SourceVolume: rabbitmq-database
           ContainerPath: /var/lib/rabbitmq
