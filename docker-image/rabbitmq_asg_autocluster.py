@@ -100,9 +100,6 @@ def get_asg_instance_private_dnsnames():
     private_short_dnsnames = []
     for instance_id in get_asg_instance_ids():
         instance = ec2.Instance(instance_id)
-        """"
-        Quick and dirty workaround because we were not creating properly the sort names
-        """"
         private_short_dnsnames.append(re.sub('.eu-west-1.compute.internal', '', instance.private_dns_name))
 
     return private_short_dnsnames
