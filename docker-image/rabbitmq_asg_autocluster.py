@@ -1,4 +1,4 @@
-#!/usr/bin/python 
+#!/usr/bin/python
 
 """
 Automation of Rabbitmq clustering in Amazon EC2 Container Service based on AWS Auto Scaling group membership.
@@ -64,7 +64,7 @@ def get_asg_name():
     )
     asg_instance = response['AutoScalingInstances'][0]
 
-    return asg_instance['AutoScalingGroupName'] 
+    return asg_instance['AutoScalingGroupName']
 
 
 def get_asg_instance_ids():
@@ -100,7 +100,10 @@ def get_asg_instance_private_dnsnames():
     private_short_dnsnames = []
     for instance_id in get_asg_instance_ids():
         instance = ec2.Instance(instance_id)
-        private_short_dnsnames.append(re.sub('.ec2.internal', '', instance.private_dns_name))
+        """"
+        Quick and dirty workaround because we were not creating properly the sort names
+        """"
+        private_short_dnsnames.append(re.sub('.eu-west-1.compute.internal', '', instance.private_dns_name))
 
     return private_short_dnsnames
 
